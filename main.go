@@ -3,21 +3,25 @@ package main
 import (
 	"fmt"
 	"net/http"
-	"relation/controller"
+	"relasi/controller"
 )
 
 func main() {
 	http.HandleFunc("/get", controller.Get)
 	http.HandleFunc("/post", controller.Post)
+	http.HandleFunc("/delete/", controller.Delete)
+	http.HandleFunc("/detail/", controller.Detail)
+
 	http.HandleFunc("/getjual", controller.GetJual)
 	http.HandleFunc("/postjual", controller.PostJual)
-	http.HandleFunc("/getbarang/", controller.GetBarang)
-	http.HandleFunc("/postkat", controller.PostKategori)
 
-	fmt.Println("Start Runnning")
+	http.HandleFunc("/postkategori", controller.PostKtg)
+	http.HandleFunc("/getkategori", controller.GetKtg)
+
+	http.HandleFunc("/getjoin/", controller.Join)
+
+	fmt.Println("Running Service")
 	if err := http.ListenAndServe(":5000", nil); err != nil {
-		fmt.Println("Can't Start Server")
-		return
+		fmt.Printf("Error Starting Service")
 	}
-
 }
