@@ -1,23 +1,25 @@
 package main
 
 import (
+	"crud/controller"
 	"fmt"
 	"net/http"
-	"relation/controller"
 )
 
 func main() {
 	http.HandleFunc("/get", controller.Get)
 	http.HandleFunc("/post", controller.Post)
-	http.HandleFunc("/getjual", controller.GetJual)
-	http.HandleFunc("/postjual", controller.PostJual)
-	http.HandleFunc("/getbarang/", controller.GetBarang)
-	http.HandleFunc("/postkat", controller.PostKategori)
+	http.HandleFunc("/getlimit", controller.Getlimits)
+	http.HandleFunc("/put/", controller.Update)
 
-	fmt.Println("Start Runnning")
-	if err := http.ListenAndServe(":5000", nil); err != nil {
-		fmt.Println("Can't Start Server")
-		return
+	http.HandleFunc("/postJual", controller.PostJual)
+	http.HandleFunc("/getJual", controller.GetJual)
+	http.HandleFunc("/view/", controller.View)
+
+	fmt.Println("Running Service")
+
+	if err := http.ListenAndServe(":5000", nil); err != nil { //return listenandserve bertipe error
+		fmt.Println("Error Starting Service")
 	}
 
 }
