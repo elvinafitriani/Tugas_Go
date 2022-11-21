@@ -137,7 +137,7 @@ func Join(w http.ResponseWriter, r *http.Request) {
 
 		var result []models.Join
 
-		//DB.Raw("SELECT barangs.id_barang,barangs.nama_barang,barangs.harga,kategoris.id_ktg,kategoris.nama_ktg, juals.id_jual FROM kategoris RIGHT JOIN barangs ON barangs.kategori_id = kategoris.id_ktg LEFT JOIN juals ON barangs.id_barang = juals.barang_id").Where("barangs.id_barang = ?", id[2]).Scan(&result)
+		//DB.Raw("SELECT barangs.id_barang,barangs.nama_barang,barangs.harga,kategoris.id_ktg,kategoris.nama_ktg, juals.id_jual FROM kategoris RIGHT JOIN barangs ON barangs.kategori_id = kategoris.id_ktg LEFT JOIN juals ON barangs.id_barang = juals.barang_id").Scan(&result)
 		DB.Table("Kategoris").Select("barangs.id_barang,barangs.nama_barang,barangs.harga,kategoris.id_ktg,kategoris.nama_ktg, juals.id_jual ").Joins("RIGHT JOIN barangs ON barangs.kategori_id = kategoris.id_ktg").Joins("LEFT JOIN juals ON barangs.id_barang = juals.barang_id").Where("barangs.id_barang = ?", id[2]).Scan(&result)
 
 		datajson, err := json.Marshal(result)
